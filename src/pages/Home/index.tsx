@@ -1,104 +1,71 @@
 import Banner from '../../components/Banner'
 import ProductsList from '../../components/ProductsList'
-import Game from '../../models/Game'
 
-import rEvil4 from '../../assets/images/resident.png'
-import diablo from '../../assets/images/diablo.png'
-import starWars from '../../assets/images/star_wars.png'
-import zelda from '../../assets/images/zelda.png'
+import { useEffect, useState } from 'react'
 
-const promocoes: Game[] = [
-  {
-    id: 1,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    image: rEvil4,
-    infos: ['10%', 'R$ 250,00'],
-    system: 'Windows',
-    title: 'Resident Evil 4 - Remake'
-  },
-  {
-    id: 2,
-    category: 'RPG',
-    description:
-      'Diablo IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    image: diablo,
-    infos: ['15%', 'R$ 250,00'],
-    system: 'PS5',
-    title: 'Diablo 4'
-  },
-  {
-    id: 3,
-    category: 'Aventura',
-    description:
-      'Star Wars Jedi: Survivor é um próximo jogo de ação e aventura desenvolvido pela Respawn...',
-    image: starWars,
-    infos: ['20%', 'R$ 250,00'],
-    system: 'XBOX',
-    title: 'Star Wars Jedi Survivor'
-  },
-  {
-    id: 4,
-    category: 'RPG',
-    description:
-      'Uma aventura épica pela terra e pelos céus de Hyrule aguarda em The Legend of Zelda™...',
-    image: zelda,
-    infos: ['10%', 'R$ 250,00'],
-    title: 'The Legend of Zelda - TOK',
-    system: 'Switch'
+// API utilizada durante as aulas
+// https://fake-api-tau.vercel.app/api/eplay/destaque
+// https://fake-api-tau.vercel.app/api/eplay/em-breve
+// https://fake-api-tau.vercel.app/api/eplay/promocoes
+// https://fake-api-tau.vercel.app/api/eplay/acao
+// https://fake-api-tau.vercel.app/api/eplay/esportes
+// https://fake-api-tau.vercel.app/api/eplay/simulacao
+// https://fake-api-tau.vercel.app/api/eplay/rpg
+// https://fake-api-tau.vercel.app/api/eplay/luta
+// https://fake-api-tau.vercel.app/api/eplay/jogos/ID - ID vai do 1 ao 19
+
+export interface GalleryItem {
+  type: 'image' | 'video'
+  url: string
+}
+
+export type Game = {
+  id: number
+  name: string
+  description: string
+  release_date?: string
+  prices: {
+    discount?: number
+    old?: number
+    current: number
   }
-]
-
-const emBreve: Game[] = [
-  {
-    id: 5,
-    category: 'RPG',
-    description:
-      'Uma aventura épica pela terra e pelos céus de Hyrule aguarda em The Legend of Zelda™...',
-    image: zelda,
-    infos: ['05/04'],
-    title: 'The Legend of Zelda - TOK',
-    system: 'Switch'
-  },
-  {
-    id: 6,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    image: rEvil4,
-    infos: ['05/04'],
-    system: 'Windows',
-    title: 'Resident Evil 4 - Remake'
-  },
-  {
-    id: 7,
-    category: 'Aventura',
-    description:
-      'Star Wars Jedi: Survivor é um próximo jogo de ação e aventura desenvolvido pela Respawn...',
-    image: starWars,
-    infos: ['05/04'],
-    title: 'Star Wars Jedi Survivor',
-    system: 'Windows'
-  },
-  {
-    id: 8,
-    category: 'RPG',
-    description:
-      'Diablo IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    image: diablo,
-    infos: ['05/04'],
-    title: 'Diablo 4',
-    system: 'Windows'
+  details: {
+    category: string
+    system: string
+    developer: string
+    publisher: string
+    languages: string[]
   }
-]
+  media: {
+    thumbnail: string
+    cover: string
+    gallery: GalleryItem[]
+  }
+}
 
-const Home = () => (
-  <>
-    <Banner />
-    <ProductsList games={promocoes} title="Promoções" background="gray" />
-    <ProductsList games={emBreve} title="Em Breve" background="black" />
-  </>
-)
+const Home = () => {
+  const [promocoes, setPromocoes] = useState<Game[]>([])
+  const [emBreve, setEmBreve] = useState<Game[]>([])
+
+  useEffect(() => {
+    // Promoções
+    fetch('https://fake-api-tau.vercel.app/api/eplay/promocoes')
+      .then((res) => res.json())
+      .then((res) => setPromocoes(res))
+
+    // Em Breve
+    fetch('https://fake-api-tau.vercel.app/api/eplay/em-breve')
+      .then((res) => res.json())
+      .then((res) => setEmBreve(res))
+  }, [])
+
+  return (
+    <>
+      <Banner />
+      <ProductsList games={promocoes} title="Promoções" background="gray" />
+      <ProductsList games={emBreve} title="Em Breve" background="black" />
+    </>
+  )
+}
 
 export default Home

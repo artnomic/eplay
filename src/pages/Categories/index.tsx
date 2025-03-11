@@ -1,190 +1,55 @@
+import { useEffect, useState } from 'react'
+
+import { Game } from '../../pages/Home'
 import ProductsList from '../../components/ProductsList'
-import Game from '../../models/Game'
 
-import rEvil4 from '../../assets/images/resident.png'
-import diablo from '../../assets/images/diablo.png'
-import starWars from '../../assets/images/star_wars.png'
-import zelda from '../../assets/images/zelda.png'
+const Categories = () => {
+  const [gamesAcao, setGamesAcao] = useState<Game[]>([])
+  const [gamesEsporte, setGamesEsporte] = useState<Game[]>([])
+  const [gamesSimulacao, setGamesSimulacao] = useState<Game[]>([])
+  const [gamesLuta, setGamesLuta] = useState<Game[]>([])
+  const [gamesRPG, setGamesRPG] = useState<Game[]>([])
 
-const rpg: Game[] = [
-  {
-    id: 1,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    image: rEvil4,
-    infos: ['10%', 'R$ 250,00'],
-    system: 'Windows',
-    title: 'Resident Evil 4 - Remake'
-  },
-  {
-    id: 2,
-    category: 'RPG',
-    description:
-      'Diablo IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    image: diablo,
-    infos: ['15%', 'R$ 250,00'],
-    system: 'PS5',
-    title: 'Diablo 4'
-  },
-  {
-    id: 3,
-    category: 'Aventura',
-    description:
-      'Star Wars Jedi: Survivor é um próximo jogo de ação e aventura desenvolvido pela Respawn...',
-    image: starWars,
-    infos: ['20%', 'R$ 250,00'],
-    system: 'XBOX',
-    title: 'Star Wars Jedi Survivor'
-  },
-  {
-    id: 4,
-    category: 'RPG',
-    description:
-      'Uma aventura épica pela terra e pelos céus de Hyrule aguarda em The Legend of Zelda™...',
-    image: zelda,
-    infos: ['10%', 'R$ 250,00'],
-    title: 'The Legend of Zelda - TOK',
-    system: 'Switch'
-  }
-]
+  useEffect(() => {
+    // Ação
+    fetch('https://fake-api-tau.vercel.app/api/eplay/acao')
+      .then((res) => res.json())
+      .then((res) => setGamesAcao(res))
 
-const action: Game[] = [
-  {
-    id: 5,
-    category: 'RPG',
-    description:
-      'Uma aventura épica pela terra e pelos céus de Hyrule aguarda em The Legend of Zelda™...',
-    image: zelda,
-    infos: ['05/04'],
-    title: 'The Legend of Zelda - TOK',
-    system: 'Switch'
-  },
-  {
-    id: 6,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    image: rEvil4,
-    infos: ['05/04'],
-    system: 'Windows',
-    title: 'Resident Evil 4 - Remake'
-  },
-  {
-    id: 7,
-    category: 'Aventura',
-    description:
-      'Star Wars Jedi: Survivor é um próximo jogo de ação e aventura desenvolvido pela Respawn...',
-    image: starWars,
-    infos: ['05/04'],
-    title: 'Star Wars Jedi Survivor',
-    system: 'Windows'
-  },
-  {
-    id: 8,
-    category: 'RPG',
-    description:
-      'Diablo IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    image: diablo,
-    infos: ['05/04'],
-    title: 'Diablo 4',
-    system: 'Windows'
-  }
-]
+    // Esportes
+    fetch('https://fake-api-tau.vercel.app/api/eplay/esportes')
+      .then((res) => res.json())
+      .then((res) => setGamesEsporte(res))
 
-const adventure: Game[] = [
-  {
-    id: 1,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    image: rEvil4,
-    infos: ['10%', 'R$ 250,00'],
-    system: 'Windows',
-    title: 'Resident Evil 4 - Remake'
-  },
-  {
-    id: 2,
-    category: 'RPG',
-    description:
-      'Diablo IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    image: diablo,
-    infos: ['15%', 'R$ 250,00'],
-    system: 'PS5',
-    title: 'Diablo 4'
-  },
-  {
-    id: 3,
-    category: 'Aventura',
-    description:
-      'Star Wars Jedi: Survivor é um próximo jogo de ação e aventura desenvolvido pela Respawn...',
-    image: starWars,
-    infos: ['20%', 'R$ 250,00'],
-    system: 'XBOX',
-    title: 'Star Wars Jedi Survivor'
-  },
-  {
-    id: 4,
-    category: 'RPG',
-    description:
-      'Uma aventura épica pela terra e pelos céus de Hyrule aguarda em The Legend of Zelda™...',
-    image: zelda,
-    infos: ['10%', 'R$ 250,00'],
-    title: 'The Legend of Zelda - TOK',
-    system: 'Switch'
-  }
-]
+    // Simulação
+    fetch('https://fake-api-tau.vercel.app/api/eplay/simulacao')
+      .then((res) => res.json())
+      .then((res) => setGamesSimulacao(res))
 
-const fps: Game[] = [
-  {
-    id: 5,
-    category: 'RPG',
-    description:
-      'Uma aventura épica pela terra e pelos céus de Hyrule aguarda em The Legend of Zelda™...',
-    image: zelda,
-    infos: ['05/04'],
-    title: 'The Legend of Zelda - TOK',
-    system: 'Switch'
-  },
-  {
-    id: 6,
-    category: 'Ação',
-    description:
-      'Resident Evil 4, conhecido no Japão como Biohazard 4, é um jogo eletrônico de survival horror...',
-    image: rEvil4,
-    infos: ['05/04'],
-    system: 'Windows',
-    title: 'Resident Evil 4 - Remake'
-  },
-  {
-    id: 7,
-    category: 'Aventura',
-    description:
-      'Star Wars Jedi: Survivor é um próximo jogo de ação e aventura desenvolvido pela Respawn...',
-    image: starWars,
-    infos: ['05/04'],
-    title: 'Star Wars Jedi Survivor',
-    system: 'Windows'
-  },
-  {
-    id: 8,
-    category: 'RPG',
-    description:
-      'Diablo IV é um RPG de ação em desenvolvimento pela Blizzard Entertainment.',
-    image: diablo,
-    infos: ['05/04'],
-    title: 'Diablo 4',
-    system: 'Windows'
-  }
-]
+    // Luta
+    fetch('https://fake-api-tau.vercel.app/api/eplay/luta')
+      .then((res) => res.json())
+      .then((res) => setGamesLuta(res))
 
-const Categories = () => (
-  <>
-    <ProductsList games={rpg} title="RPG" background="gray" />
-    <ProductsList games={action} title="Ação" background="black" />
-    <ProductsList games={adventure} title="Aventura" background="gray" />
-    <ProductsList games={fps} title="FPS" background="black" />
-  </>
-)
+    // RPG
+    fetch('https://fake-api-tau.vercel.app/api/eplay/rpg')
+      .then((res) => res.json())
+      .then((res) => setGamesRPG(res))
+  }, [])
+
+  return (
+    <>
+      <ProductsList games={gamesAcao} title="Ação" background="black" />
+      <ProductsList games={gamesEsporte} title="Esporte" background="gray" />
+      <ProductsList
+        games={gamesSimulacao}
+        title="Simulação"
+        background="black"
+      />
+      <ProductsList games={gamesLuta} title="Luta" background="gray" />
+      <ProductsList games={gamesRPG} title="RPG" background="black" />
+    </>
+  )
+}
 
 export default Categories

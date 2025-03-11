@@ -1,3 +1,7 @@
+import { useState } from 'react'
+
+import { GalleryItem } from '../../pages/Home'
+
 import { Action, Item, Items, Modal, ModalContent } from './styles'
 
 import zelda from '../../assets/images/zelda.png'
@@ -6,12 +10,6 @@ import hogwarts from '../../assets/images/fundo_hogwarts.png'
 import zoom from '../../assets/images/zoom.png'
 import play from '../../assets/images/play.png'
 import fechar from '../../assets/images/fechar.png'
-import { useState } from 'react'
-
-interface GalleryItem {
-  type: 'image' | 'video'
-  url: string
-}
 
 const mock: GalleryItem[] = [
   {
