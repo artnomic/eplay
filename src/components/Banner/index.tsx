@@ -19,7 +19,7 @@ const Banner = () => {
   }, [])
 
   if (!game) {
-    return <h1>Carregando ...</h1>
+    return <h3>Carregando ...</h3>
   }
 
   return (
@@ -28,15 +28,15 @@ const Banner = () => {
         <div className="container">
           <Tag size="big">Destaque do Dia</Tag>
           <div>
-            <Titulo>{game?.name}</Titulo>
+            <Titulo>{game.name}</Titulo>
             <Precos>
-              De <span>{formatCurrencies(game?.prices.old)}</span> <br />
-              por apenas {formatCurrencies(game?.prices.current)}
+              De <span>{formatCurrencies(game.prices.old)}</span> <br />
+              por apenas {formatCurrencies(game.prices.current)}
             </Precos>
           </div>
           <Button
             type="link"
-            to="/product"
+            to={`/product/${game.id}`}
             title="Clique aqui para aproveitar essa oferta"
           >
             Aproveitar

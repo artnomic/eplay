@@ -2,6 +2,7 @@ import Tag from '../Tag'
 import { Card, Descricao, Infos, Titulo } from './styles'
 
 type Props = {
+  id: number
   title: string
   category: string
   system: string
@@ -11,21 +12,22 @@ type Props = {
 }
 
 const Product = ({
+  id,
   title,
   category,
+  system,
   description,
-  image,
   infos,
-  system
+  image
 }: Props) => {
   const getDescription = (description: string) => {
-    if (description.length > 95) return description.slice(0, 92) + '...'
+    if (description.length > 90) return description.slice(0, 87) + '...'
 
     return description
   }
 
   return (
-    <Card>
+    <Card to={`/product/${id}`}>
       <img src={image} alt={title} />
       <Infos>
         {infos.map((info) => (
