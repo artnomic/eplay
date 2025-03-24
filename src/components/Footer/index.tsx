@@ -1,61 +1,44 @@
-import {
-  FooterContainer,
-  FooterHeader,
-  FooterList,
-  FooterListContainer,
-  FooterText
-} from './styles'
+import { Container, FooterSection, Links, Link, SectionTitle } from './styles'
 
 const currentYear = new Date().getFullYear()
 
 const Footer = () => (
-  <FooterContainer>
+  <Container>
     <div className="container">
-      <FooterHeader>Categorias</FooterHeader>
-      <FooterList>
-        <FooterListContainer>
-          <a href="#">RPG</a>
-        </FooterListContainer>
-        <FooterListContainer>
-          <a href="#">Ação</a>
-        </FooterListContainer>
-        <FooterListContainer>
-          <a href="#">Aventura</a>
-        </FooterListContainer>
-        <FooterListContainer>
-          <a href="#">Esportes</a>
-        </FooterListContainer>
-        <FooterListContainer>
-          <a href="#">Simulação</a>
-        </FooterListContainer>
-        <FooterListContainer>
-          <a href="#">Estratégia</a>
-        </FooterListContainer>
-        <FooterListContainer>
-          <a href="#">FPS</a>
-        </FooterListContainer>
-      </FooterList>
+      <FooterSection>
+        <SectionTitle>Categorias</SectionTitle>
+        <Links>
+          <li>
+            <Link to="/categories/#rpg">RPG</Link>
+          </li>
+          <li>
+            <Link to="/categories/#action">Ação</Link>
+          </li>
+          <li>
+            <Link to="/categories/#sport">Esportes</Link>
+          </li>
+          <li>
+            <Link to="/categories/#simulation">Simulação</Link>
+          </li>
+          <li>
+            <Link to="/categories/#fight">Luta</Link>
+          </li>
+        </Links>
+      </FooterSection>
+      <FooterSection>
+        <SectionTitle>Acesso Rápido</SectionTitle>
+        <Links>
+          <li>
+            <Link to="/#on-sale">Promoções</Link>
+          </li>
+          <li>
+            <Link to="/#coming-soon">Em breve</Link>
+          </li>
+        </Links>
+      </FooterSection>
+      <p>{currentYear} - &copy; E-PLAY Todos os direitos reservados</p>
     </div>
-    <div className="container">
-      <FooterHeader>Acesso Rápido</FooterHeader>
-      <FooterList>
-        <FooterListContainer>
-          <a href="#">Novidades</a>
-        </FooterListContainer>
-        <FooterListContainer>
-          <a href="#">Promoções</a>
-        </FooterListContainer>
-        <FooterListContainer>
-          <a href="#">Em breve</a>
-        </FooterListContainer>
-      </FooterList>
-    </div>
-    <div className="container">
-      <FooterText>
-        {currentYear} - &copy; E-PLAY Todos os direitos reservados
-      </FooterText>
-    </div>
-  </FooterContainer>
+  </Container>
 )
 
 export default Footer
