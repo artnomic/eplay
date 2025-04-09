@@ -1,6 +1,8 @@
 import Banner from '../../components/Banner'
 import ProductsList from '../../components/ProductsList'
 
+import { useGetOnSaleQuery, useGetSoonQuery } from '../../services/api'
+
 // API utilizada durante as aulas
 // https://fake-api-tau.vercel.app/api/eplay/destaque
 // https://fake-api-tau.vercel.app/api/eplay/em-breve
@@ -11,8 +13,6 @@ import ProductsList from '../../components/ProductsList'
 // https://fake-api-tau.vercel.app/api/eplay/rpg
 // https://fake-api-tau.vercel.app/api/eplay/luta
 // https://fake-api-tau.vercel.app/api/eplay/jogos/ID - ID vai do 1 ao 19
-
-import { useGetOnSaleQuery, useGetSoonQuery } from '../../services/api'
 
 export interface GalleryItem {
   type: 'image' | 'video'
