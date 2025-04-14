@@ -4,10 +4,10 @@ import { Game } from '../../pages/Home'
 import Button from '../Button'
 import Tag from '../Tag'
 
-import { Banner, Infos } from './styles'
-import { formatCurrencies } from '../ProductsList'
+import * as S from './styles'
 
 import { add, open } from '../../store/reducers/cart'
+import { formatCurrencies } from '../../utils'
 
 type Props = {
   game: Game
@@ -22,14 +22,14 @@ const Hero = ({ game }: Props) => {
   }
 
   return (
-    <Banner style={{ backgroundImage: `url(${game.media.cover})` }}>
+    <S.Banner style={{ backgroundImage: `url(${game.media.cover})` }}>
       <div className="container">
         <div>
           <Tag>{game.details.category}</Tag>
           <Tag>{game.details.system}</Tag>
         </div>
 
-        <Infos>
+        <S.Infos>
           <h2>{game.name}</h2>
           <p>
             {game.prices.discount && (
@@ -54,9 +54,9 @@ const Hero = ({ game }: Props) => {
               Em Breve!
             </Button>
           )}
-        </Infos>
+        </S.Infos>
       </div>
-    </Banner>
+    </S.Banner>
   )
 }
 

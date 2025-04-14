@@ -4,9 +4,10 @@ import { GalleryItem } from '../../pages/Home'
 
 import zoom from '../../assets/images/zoom.png'
 import play from '../../assets/images/play.png'
-import fechar from '../../assets/images/fechar.png'
+import closeIcon from '../../assets/images/fechar.png'
 
-import { Action, Item, Items, Modal, ModalContent } from './styles'
+import * as S from './styles'
+import Section from '../Section'
 
 interface ModalState extends GalleryItem {
   isVisible: boolean
@@ -47,49 +48,47 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
 
   return (
     <>
-      <Items>
-        {items.map((media, index) => (
-          <Item
-            key={media.url}
-            onClick={() => {
-              setModal({
-                isVisible: true,
-                type: media.type,
-                url: media.url
-              })
-            }}
-          >
-            <img
-              src={getMediaCover(media)}
-              alt={`Mídia ${index + 1} de {${name}`}
-            />
-            <Action>
+      <Section title="Galeria" background="black">
+        <S.Items>
+          {items.map((media, index) => (
+            <S.Item
+              key={media.url}
+              onClick={() => {
+                setModal({
+                  isVisible: true,
+                  type: media.type,
+                  url: media.url
+                })
+              }}
+            >
               <img
-                src={getMediaIcon(media)}
-                alt="Clique aqui para maximizar a mídia"
+                src={getMediaCover(media)}
+                alt={`Mídia ${index + 1} de {${name}`}
               />
-            </Action>
-          </Item>
-        ))}
-      </Items>
-      <Modal className={modal.isVisible ? '__is_visible' : ''}>
-        <ModalContent className="container">
+              <S.Action>
+                <img
+                  src={getMediaIcon(media)}
+                  alt="Clique aqui para maximizar a mídia"
+                />
+              </S.Action>
+            </S.Item>
+          ))}
+        </S.Items>
+      </Section>
+      <S.Modal className={modal.isVisible ? '__is_visible' : ''}>
+        <S.ModalContent className="container">
           <header>
             <h4>{name}</h4>
-            <img
-              src={fechar}
-              alt="Icone de Fechar"
-              onClick={() => closeModal()}
-            />
+            <img src={closeIcon} alt="Icone de Fechar" onClick={closeModal} />
           </header>
           {modal.type === 'image' ? (
             <img src={modal.url} />
           ) : (
             <iframe frameBorder={0} src={modal.url} />
           )}
-        </ModalContent>
-        <div className="overlay" onClick={() => closeModal()}></div>
-      </Modal>
+        </S.ModalContent>
+        <div className="overlay" onClick={closeModal}></div>
+      </S.Modal>
     </>
   )
 }
