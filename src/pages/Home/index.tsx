@@ -14,35 +14,6 @@ import { useGetOnSaleQuery, useGetSoonQuery } from '../../services/api'
 // https://fake-api-tau.vercel.app/api/eplay/luta
 // https://fake-api-tau.vercel.app/api/eplay/jogos/ID - ID vai do 1 ao 19
 
-export interface GalleryItem {
-  type: 'image' | 'video'
-  url: string
-}
-
-export type Game = {
-  id: number
-  name: string
-  description: string
-  release_date?: string
-  prices: {
-    discount?: number
-    old?: number
-    current: number
-  }
-  details: {
-    category: string
-    system: string
-    developer: string
-    publisher: string
-    languages: string[]
-  }
-  media: {
-    thumbnail: string
-    cover: string
-    gallery: GalleryItem[]
-  }
-}
-
 const Home = () => {
   const { data: onSaleGames, isLoading: isLoadingSale } = useGetOnSaleQuery()
   const { data: soonGames, isLoading: isLoadingSoon } = useGetSoonQuery()
